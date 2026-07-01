@@ -9,7 +9,7 @@
     <!-- Google Fonts: Inter para textos e Montserrat para títulos e datas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome para ícones navais e de ficheiros -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -85,9 +85,9 @@
     <!-- CONTAINER CENTRAL -->
     <main class="flex-grow w-full max-w-md mx-auto px-4 py-6 flex flex-col gap-6">
         
-        <!-- BANNER INFORMATIVO -->
+        <!-- BANNER INFORMATIVO (Borda amarela para destaque) -->
         <section class="bg-white rounded-2xl border border-slate-100 p-6 shadow-premium relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-1.5 h-full bg-navy-900"></div>
+            <div class="absolute top-0 left-0 w-1.5 h-full bg-militar-yellow"></div>
             <h2 class="font-display font-bold text-base text-navy-900 mb-1">Visitas programadas</h2>
             <p class="text-xs text-slate-600 leading-relaxed">
                 Acompanhe o cronograma de inspeções, logística de transporte e o detalhamento operacional das comitivas nas Organizações Militares subordinadas ao <strong class="text-navy-900 font-semibold">Com4ºDN</strong>.
@@ -147,9 +147,6 @@
 
             <!-- Rodapé do Modal -->
             <div class="px-5 py-4 bg-slate-50 border-t border-slate-150 flex items-center justify-end gap-2">
-                <button onclick="copyModalContent()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-navy-900 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 focus:outline-none">
-                    <i class="fa-solid fa-copy"></i> Copiar Texto
-                </button>
                 <button onclick="toggleProgramModal()" class="px-4 py-2 bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs rounded-xl transition-colors shadow-sm focus:outline-none">
                     Fechar
                 </button>
@@ -164,7 +161,7 @@
 
     <!-- SCRIPT DE LOGICA E DADOS -->
     <script>
-        // Dados estruturados oficiais das comitivas
+        // Dados estruturados oficiais das comitivas militares (ATUALIZADOS)
         const originalSchedule = [
             {
                 id: "e1",
@@ -184,7 +181,7 @@
                 title: "Visitec DSM",
                 authorities: ["DSM"],
                 omInvolved: ["Com4ºDN", "HNBe"],
-                details: "Visita programada à Unidade Médica de Intervenção (UMI) e ao Hospital Naval de Belém (HNBe) para avaliação técnica de infraestrutura médica."
+                details: "Visita ao UMI e HNBe."
             },
             {
                 id: "e3",
@@ -194,7 +191,7 @@
                 title: "Visitec SGM",
                 authorities: ["SGM"],
                 omInvolved: ["Com4ºDN", "CeIMBe", "BNVC", "2ºBtlOpRib", "CHN-4"],
-                details: "Visita de inspeção técnica às instalações do Centro de Intendência da Marinha em Belém (CeIMBe) e Base Naval de Val-de-Cães (BNVC)."
+                details: "Visita ao UMI e HNBe."
             },
             {
                 id: "e4",
@@ -204,23 +201,23 @@
                 title: "IAM Com4DN",
                 authorities: ["CON"],
                 omInvolved: ["Com4ºDN", "HNBe", "ComGptPatNavN", "CeIMBe", "CIABA", "CFS", "CPAP", "CPMA", "CPPI", "CPAOR", "2ºBtlOpRib", "CHN-4", "EsqdHU-41"],
-                details: "Visita a TODAS as OM da área Belém, além da CFS e CPAP (ASC). O detalhamento da visita será encaminhado em breve por Memorando. Os deslocamentos a CFS e CPAP serão com ANV UH-15. Faremos uma demonstração operativa ribeirinha a bordo do NA Pará e visita ao Anna Nery e Sgt Lima. Avaliação de realização do evento de celebração dos 150 anos do Edifício do Com4DN no dia 26 ou 27AGO."
+                details: "Visita a TODAS as OM da área Belém, além da CFS e CPAP (ASC). O detalhamento da visita será encaminhado em breve por Memorando. Os deslocamentos a CFS e CPAP (caso ocorra) serão com ANV UH-15. Faremos uma demonstração operativa ribeirinha a bordo do NA Pará e visita ao Anna Nery e Sgt Lima. Avalio realizar o evento de celebração dos 150 anos do Edifício do Com4DN no dia 26 ou 27AGO;"
             },
             {
                 id: "e5",
-                dateStart: "2026-09-10",
-                dateEnd: "2026-09-15",
-                dateFormatted: "SETEMBRO 2026 (VAP)",
+                dateStart: "2026-10-05",
+                dateEnd: "2026-10-13",
+                dateFormatted: "05 a 13 OUT 2026",
+                title: "Visita do Almirantado Programado (VAP)",
                 authorities: ["COMGER"],
-                omInvolved: ["Com4ºDN", "ComGptPatNavN", "2ºBtlOpRib", "CFS", "NA Pará"],
-                details: "Visita programada à CFS e atividades operacionais intensivas no 2º Batalhão de Operações Ribeirinhas. Atividades: corrida integrada com a tripulação, demonstração de Desembarque Ribeirinho com o NA Pará e visita à área de instrução prática Dr. Guataçara (ASC)."
+                omInvolved: ["Com4ºDN", "ComGptPatNavN", "2ºBtlOpRib", "CFS", "NAPara"],
+                details: "Visita a CFS e atividades no 2BtlOpRib (Corrida com a tripulação, Demonstração Desembarque Ribeirinho com o NA Pará, visita a área de treinamento do Dr Guataçara - ASC)"
             }
         ];
 
         let schedule = [...originalSchedule];
         let ascendingOrder = true; 
         let openCardId = null;
-        let selectedEventForModal = null;
 
         window.addEventListener('DOMContentLoaded', () => {
             renderEvents();
@@ -244,7 +241,7 @@
             });
         }
 
-        // Renderização dos cards de Itinerário empilhados
+        // Renderização dos cards de Itinerário empilhados com borda amarela de alto contraste
         function renderEvents() {
             sortEvents();
             const container = document.getElementById('eventsContainer');
@@ -267,6 +264,9 @@
                     <span class="inline-flex text-[9px] font-bold px-2 py-0.5 rounded bg-navy-50 text-navy-800 border border-navy-100">${om}</span>
                 `).join('');
 
+                // Determinar singular ou plural para Autoridades de forma dinâmica (REQUISITO 4)
+                const authLabel = event.authorities.length === 1 ? "Autoridade" : "Autoridades";
+
                 // Autoridades estruturadas individualmente em bullets
                 const authoritiesList = event.authorities.map(auth => `
                     <li class="flex items-center gap-2">
@@ -275,19 +275,41 @@
                     </li>
                 `).join('');
 
+                // Customizar o título de download do PDF para Memorando em casos específicos (REQUISITO 6)
+                const isMemorando = event.id === "e1" || event.id === "e4";
+                const pdfTitle = isMemorando ? "Memorando" : "Descarregar PDF";
+
+                // Verificar se o evento é uma VISITEC (REQUISITO 6)
+                const isVisitec = event.title.toLowerCase().includes("visitec");
+
+                // Montar o botão do PDF de forma condicional
+                let pdfButtonHtml = "";
+                if (!isVisitec) {
+                    pdfButtonHtml = `
+                        <!-- Descarregar PDF/Memorando (Vermelho) -->
+                        <button onclick="downloadMockFile('${event.id}', 'pdf')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-red-600 hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="${pdfTitle}">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </button>
+                    `;
+                }
+
                 const eventCard = document.createElement('div');
-                eventCard.className = `group relative rounded-2xl bg-white border ${isExpanded ? 'border-navy-900 shadow-premium-hover ring-1 ring-navy-900/10' : 'border-slate-150 hover:border-slate-200'} overflow-hidden transition-all duration-300 shadow-premium`;
+                // Estilo igual à caixa de título do cabeçalho com faixa amarela à esquerda (REQUISITOS 1 e 2)
+                eventCard.className = `group relative rounded-2xl bg-white border ${isExpanded ? 'border-navy-900 shadow-premium-hover ring-1 ring-navy-900/10' : 'border-slate-150 hover:border-slate-200'} overflow-hidden transition-all duration-300 shadow-premium pl-6 pr-5 py-5`;
                 
                 eventCard.innerHTML = `
+                    <!-- Faixa lateral amarela para dar exatamente o mesmo destaque visual e herança da caixa de título -->
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-militar-yellow"></div>
+                    
                     <!-- Ponto de ancoragem na linha do tempo vertical -->
                     <div class="absolute top-6 -left-[13px] w-2.5 h-2.5 rounded-full bg-white border-2 border-navy-900 z-10"></div>
                     
                     <!-- CABEÇALHO DO CARD (Sempre Visível) -->
-                    <div class="p-5 flex items-center justify-between gap-4 cursor-pointer select-none" onclick="toggleCard('${event.id}')">
+                    <div class="flex items-center justify-between gap-4 cursor-pointer select-none" onclick="toggleCard('${event.id}')">
                         <div class="min-w-0 flex-grow">
-                            <!-- Data estilizada -->
+                            <!-- Data estilizada proporcional ao título, sem negrito (REQUISITO 3) -->
                             <div class="flex items-center gap-1.5 mb-1.5">
-                                <span class="font-display font-semibold text-[11px] text-navy-900 tracking-wider uppercase">
+                                <span class="font-display font-medium text-xs text-navy-900 tracking-wide uppercase">
                                     ${event.dateFormatted}
                                 </span>
                             </div>
@@ -296,14 +318,12 @@
                             </h3>
                         </div>
 
-                        <!-- Botões Rápidos de Ação e Download -->
+                        <!-- Botões Rápidos de Ação e Download (Ícones vermelhos e pretos) -->
                         <div class="flex items-center gap-2 shrink-0" onclick="event.stopPropagation()">
-                            <!-- Descarregar PDF -->
-                            <button onclick="downloadMockFile('${event.id}', 'pdf')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-navy-900 hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="Descarregar PDF">
-                                <i class="fa-solid fa-file-pdf"></i>
-                            </button>
-                            <!-- Descarregar Ficheiro de Texto (Ofício) -->
-                            <button onclick="downloadMockFile('${event.id}', 'word')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-navy-900 hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="Descarregar Ofício">
+                            ${pdfButtonHtml}
+                            
+                            <!-- Descarregar Ficheiro de Texto (Preto) -->
+                            <button onclick="downloadMockFile('${event.id}', 'word')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-black hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="Descarregar Ofício">
                                 <i class="fa-solid fa-file-lines"></i>
                             </button>
                             <!-- Chevron de Expansão -->
@@ -314,12 +334,12 @@
                     </div>
 
                     <!-- SECÇÃO DETALHADA DE EXPANSÃO -->
-                    <div class="transition-max-height overflow-hidden ${isExpanded ? 'max-h-[600px] border-t border-slate-100' : 'max-h-0'}" style="will-change: max-height;">
-                        <div class="p-5 bg-slate-50/50 flex flex-col gap-4 text-xs">
+                    <div class="transition-max-height overflow-hidden ${isExpanded ? 'max-h-[600px] border-t border-slate-100 mt-4' : 'max-h-0'}" style="will-change: max-height;">
+                        <div class="pt-4 flex flex-col gap-4 text-xs">
                             
-                            <!-- AUTORIDADES (Bullets em novas linhas) -->
+                            <!-- AUTORIDADES (Bullets com pluralização automática - REQUISITO 4) -->
                             <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-navy-900">
-                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-2">Autoridades</span>
+                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-2">${authLabel}</span>
                                 <ul class="space-y-1.5">
                                     ${authoritiesList}
                                 </ul>
@@ -339,7 +359,7 @@
                                 </div>
                             </div>
 
-                            <!-- BOTÃO PROGRAMA DE EVENTOS -->
+                            <!-- BOTÃO PROGRAMA DE EVENTOS (Aviso em construção - REQUISITO 5) -->
                             <button onclick="openProgramModal('${event.id}')" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm focus:outline-none">
                                 <i class="fa-solid fa-calendar-days text-militar-yellow"></i> Programa de Eventos
                             </button>
@@ -360,39 +380,21 @@
             renderEvents();
         }
 
-        // Gestão do Modal "Programa de Eventos"
+        // Gestão do Modal "Programa de Eventos" - Retorna aviso de em construção (REQUISITO 5)
         function openProgramModal(eventId) {
             const event = originalSchedule.find(e => e.id === eventId);
             if (!event) return;
             
-            selectedEventForModal = event;
             const modalBody = document.getElementById('modalBody');
             
             modalBody.innerHTML = `
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col items-center justify-center py-8 text-center gap-4">
+                    <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center text-militar-yellow">
+                        <i class="fa-solid fa-person-digging text-3xl"></i>
+                    </div>
                     <div>
-                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block">Visita Oficial</span>
-                        <h4 class="font-display font-bold text-sm text-navy-900">${event.title}</h4>
-                        <p class="text-xs text-slate-600 mt-1 font-semibold">${event.dateFormatted}</p>
-                    </div>
-                    
-                    <div class="border-t border-slate-100 pt-3">
-                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1">Autoridades Confirmadas</span>
-                        <div class="flex flex-wrap gap-2 mt-1">
-                            ${event.authorities.map(auth => `<span class="bg-navy-50 text-navy-900 font-bold px-2.5 py-1 rounded-lg border border-navy-100 text-[10px]">${auth}</span>`).join('')}
-                        </div>
-                    </div>
-                    
-                    <div class="border-t border-slate-100 pt-3">
-                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1.5">Roteiro & Diretriz de Execução</span>
-                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-slate-700 leading-relaxed text-xs">
-                            ${event.details}
-                        </div>
-                    </div>
-                    
-                    <div class="border-t border-slate-100 pt-3">
-                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block">OM Coordenadoras</span>
-                        <p class="text-xs font-semibold text-slate-800 mt-1">${event.omInvolved.join(', ')}</p>
+                        <h4 class="font-display font-bold text-sm text-navy-900 mb-1">Programa de Eventos</h4>
+                        <p class="text-xs text-slate-600 font-bold tracking-tight">Programa de Eventos em construção</p>
                     </div>
                 </div>
             `;
@@ -417,28 +419,6 @@
                     modal.classList.add('hidden');
                 }, 300);
             }
-        }
-
-        // Copiar conteúdo estruturado do modal de programa de eventos
-        function copyModalContent() {
-            if (!selectedEventForModal) return;
-            
-            const textToCopy = `[MARINHA DO BRASIL - COM4DN]\n` +
-                               `PROGRAMA OFICIAL DE EVENTOS\n` +
-                               `Atividade: ${selectedEventForModal.title}\n` +
-                               `Data: ${selectedEventForModal.dateFormatted}\n` +
-                               `Autoridades: ${selectedEventForModal.authorities.join(', ')}\n` +
-                               `Diretrizes: ${selectedEventForModal.details}\n` +
-                               `OM de Apoio: ${selectedEventForModal.omInvolved.join(', ')}`;
-                               
-            const el = document.createElement('textarea');
-            el.value = textToCopy;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            
-            showToast("Programa de Eventos copiado!");
         }
 
         function toggleSorting() {
@@ -476,6 +456,9 @@
             const event = originalSchedule.find(e => e.id === eventId);
             if (!event) return;
 
+            const isMemorando = event.id === "e1" || event.id === "e4";
+            const docName = isMemorando ? "Memorando" : "Diretriz";
+
             const separator = `========================================================\n`;
             const header = `              MARINHA DO BRASIL - COM4DN\n` +
                            `    DIRETRIZ OFICIAL DE VISITA E LOGÍSTICA DE COMITIVA\n` +
@@ -488,14 +471,14 @@
                             `${event.omInvolved.join(", ")}\n\n` +
                             `CRONOGRAMA DE ATIVIDADES:\n` +
                             `${event.details}\n\n` +
-                            `DOCUMENTO EMITIDO EM SESSÃO OFICIAL ELETRÓNICA DO COMANDO.\n` +
+                            `DOCUMENTO EMITIDO EM SESSÃO OFICIAL ELETRÔNICA DO COMANDO.\n` +
                             `CONTROLE DE DIRETRIZES DA MARINHA DO BRASIL.`;
 
             const rawText = separator + header + separator + "\n" + content;
             
             const element = document.createElement('a');
             const fileExtension = format === 'pdf' ? 'pdf' : 'doc';
-            const fileName = `DIRETRIZ_${event.id}_${format}.${fileExtension}`;
+            const fileName = `${docName.toUpperCase()}_${event.id}_${format}.${fileExtension}`;
             
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(rawText));
             element.setAttribute('download', fileName);
@@ -505,7 +488,7 @@
             element.click();
             document.body.removeChild(element);
             
-            showToast(`Diretriz (.${format.toUpperCase()}) descarregada!`);
+            showToast(`${docName} (.${format.toUpperCase()}) descarregado!`);
         }
 
         // Feedback visual discreto (Micro-Toast)
