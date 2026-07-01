@@ -74,7 +74,7 @@
             <!-- ESPAÇO PARA IMAGEM PNG PROPORCIONAL AO TÍTULO -->
             <div class="shrink-0">
                 <!-- Substitua o "src" pelo seu ficheiro local "brasao-4dn.png" -->
-                <img id="brasaoImg" src="brasao-4dn.png" 
+                <img id="brasaoImg" src="brasao.png" 
                      onerror="showFallbackIcon()" 
                      alt="Brasão Com4ºDN" 
                      class="w-14 h-14 object-contain transition-all duration-200" />
@@ -169,6 +169,9 @@
             arquivosCustomizados: {
                 "e1": {
                     "pdf": "Memo-Anna-Nery.pdf"
+                }
+                "e3": {
+                    "pdf": "VISITEC-SGM.pdff"
                 }
             },
             gerarNomeCompleto: function(evento, formato, isMemorando) {
@@ -328,7 +331,7 @@
                 if (!event.hideWord) {
                     wordButtonHtml = `
                         <!-- Descarregar Ficheiro de Texto (Preto) -->
-                        <button onclick="downloadMockFile('${event.id}', 'word')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-black hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="Descarregar Ofício">
+                        <button onclick="downloadMockFile('${event.id}', 'word')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-black hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="Download da Mensagem">
                             <i class="fa-solid fa-file-lines"></i>
                         </button>
                     `;
@@ -391,7 +394,7 @@
 
                             <!-- ORGANIZAÇÕES MILITARES ENVOLVIDAS -->
                             <div>
-                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1.5">Organizações Subordinadas</span>
+                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1.5">Organizações Militares envolvidas</span>
                                 <div class="flex flex-wrap gap-1.5">
                                     ${omTags}
                                 </div>
