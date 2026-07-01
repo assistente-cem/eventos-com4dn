@@ -73,8 +73,8 @@
             
             <!-- ESPAÇO PARA IMAGEM PNG PROPORCIONAL AO TÍTULO -->
             <div class="shrink-0">
-                <!-- Substitua o "src" pelo seu ficheiro local "brasao.png" -->
-                <img id="brasaoImg" src="brasao.png" 
+                <!-- Substitua o "src" pelo seu ficheiro local "brasao-4dn.png" -->
+                <img id="brasaoImg" src="brasao-4dn.png" 
                      onerror="showFallbackIcon()" 
                      alt="Brasão Com4ºDN" 
                      class="w-14 h-14 object-contain transition-all duration-200" />
@@ -85,14 +85,12 @@
     <!-- CONTAINER CENTRAL -->
     <main class="flex-grow w-full max-w-md mx-auto px-4 py-6 flex flex-col gap-6">
         
-        <!-- BANNER INFORMATIVO (Borda amarela para destaque) -->
-        <section class="bg-white rounded-2xl border border-slate-100 p-6 shadow-premium relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-1.5 h-full bg-militar-yellow"></div>
-            <h2 class="font-display font-bold text-base text-navy-900 mb-1">Visitas programadas</h2>
-            <p class="text-xs text-slate-600 leading-relaxed">
-                Acompanhe o cronograma de inspeções, logística de transporte e o detalhamento operacional das comitivas nas Organizações Militares subordinadas ao <strong class="text-navy-900 font-semibold">Com4ºDN</strong>.
-            </p>
-        </section>
+        <!-- APENAS O TÍTULO SOLICITADO (Substituindo o antigo banner/card informativo) -->
+        <div class="px-1 mt-2">
+            <h2 class="font-display font-extrabold text-lg text-navy-900 tracking-tight">
+                Próximos eventos programados
+            </h2>
+        </div>
 
         <!-- SECÇÃO DE FILTROS E ORDENAÇÃO -->
         <section class="flex flex-col gap-3">
@@ -161,6 +159,33 @@
 
     <!-- SCRIPT DE LOGICA E DADOS -->
     <script>
+        // ==========================================
+        // CONFIGURAÇÃO DE NOMES DOS ARQUIVOS BAIXADOS
+        // ==========================================
+        const CONFIG_NOMES_ARQUIVOS = {
+            pdfDiretrizPadrao: "Diretriz_Oficial",
+            pdfMemorandoPadrao: "Memorando_Com4DN",
+            wordOficioPadrao: "Oficio_Diretriz",
+            arquivosCustomizados: {
+                "e1": {
+                    "pdf": "Memo-Anna-Nery.pdf"
+                }
+            },
+            gerarNomeCompleto: function(evento, formato, isMemorando) {
+                const idEvento = evento.id;
+                if (this.arquivosCustomizados[idEvento] && this.arquivosCustomizados[idEvento][format]) {
+                    return this.arquivosCustomizados[idEvento][format];
+                }
+                const dataSanitizada = evento.dateFormatted.replace(/\s+/g, '_'); 
+                if (formato === 'pdf') {
+                    const prefixo = isMemorando ? this.pdfMemorandoPadrao : this.pdfDiretrizPadrao;
+                    return `${prefixo}_${idEvento}_${dataSanitizada}.pdf`;
+                } else {
+                    return `${this.wordOficioPadrao}_${idEvento}_${dataSanitizada}.doc`;
+                }
+            }
+        };
+
         // Dados estruturados oficiais das comitivas militares (ATUALIZADOS)
         const originalSchedule = [
             {
@@ -168,10 +193,12 @@
                 dateStart: "2026-07-28",
                 dateEnd: "2026-07-28",
                 dateFormatted: "28 JUL 2026",
-                title: "Incorporação do NAsH Anna Nery",
+                title: "Incorporação do NAsH \"Anna Nery\"",
                 authorities: ["CEMA", "DGMM"],
                 omInvolved: ["Com4ºDN", "ComGptPatNavN", "2ºBtlOpRib", "CHN-4"],
-                details: "O DGMM chega no dia 26JUL e no dia 27JUL visitará o 2BtlOpRib (Obras), BNVC (Dique seco, obras no píer, Navios do GNN e do CHN) e Com4DN (Auditório Portal da Amazônia)."
+                details: "O DGMM chega no dia 26JUL e no dia 27JUL visitará o 2BtlOpRib (Obras), BNVC (Dique seco, obras no píer, Navios do GNN e do CHN) e Com4DN (Auditório Portal da Amazônia).",
+                isMemorando: true,
+                hideWord: true
             },
             {
                 id: "e2",
@@ -181,7 +208,9 @@
                 title: "Visitec DSM",
                 authorities: ["DSM"],
                 omInvolved: ["Com4ºDN", "HNBe"],
-                details: "Visita ao UMI e HNBe."
+                details: "Visita ao UMI e HNBe.",
+                hidePdf: true,
+                hideWord: true
             },
             {
                 id: "e3",
@@ -191,7 +220,8 @@
                 title: "Visitec SGM",
                 authorities: ["SGM"],
                 omInvolved: ["Com4ºDN", "CeIMBe", "BNVC", "2ºBtlOpRib", "CHN-4"],
-                details: "Visita ao UMI e HNBe."
+                details: "Visita ao UMI e HNBe.",
+                hidePdf: true
             },
             {
                 id: "e4",
@@ -201,17 +231,21 @@
                 title: "IAM Com4DN",
                 authorities: ["CON"],
                 omInvolved: ["Com4ºDN", "HNBe", "ComGptPatNavN", "CeIMBe", "CIABA", "CFS", "CPAP", "CPMA", "CPPI", "CPAOR", "2ºBtlOpRib", "CHN-4", "EsqdHU-41"],
-                details: "Visita a TODAS as OM da área Belém, além da CFS e CPAP (ASC). O detalhamento da visita será encaminhado em breve por Memorando. Os deslocamentos a CFS e CPAP (caso ocorra) serão com ANV UH-15. Faremos uma demonstração operativa ribeirinha a bordo do NA Pará e visita ao Anna Nery e Sgt Lima. Avalio realizar o evento de celebração dos 150 anos do Edifício do Com4DN no dia 26 ou 27AGO;"
+                details: "Visita a TODAS as OM da área Belém, além da CFS e CPAP (ASC). O detalhamento da visita será encaminhado em breve por Memorando. Os deslocamentos a CFS e CPAP (caso ocorra) serão com ANV UH-15. Faremos uma demonstração operativa ribeirinha a bordo do NA Pará e visita ao Anna Nery e Sgt Lima. Avalio realizar o evento de celebração dos 150 anos do Edifício do Com4DN no dia 26 ou 27AGO;",
+                isMemorando: true,
+                hideWord: true
             },
             {
                 id: "e5",
                 dateStart: "2026-10-05",
                 dateEnd: "2026-10-13",
                 dateFormatted: "05 a 13 OUT 2026",
-                title: "Visita do Almirantado Programado (VAP)",
+                title: "Visita do Almirantado Programada (VAP)",
                 authorities: ["COMGER"],
                 omInvolved: ["Com4ºDN", "ComGptPatNavN", "2ºBtlOpRib", "CFS", "NAPara"],
-                details: "Visita a CFS e atividades no 2BtlOpRib (Corrida com a tripulação, Demonstração Desembarque Ribeirinho com o NA Pará, visita a área de treinamento do Dr Guataçara - ASC)"
+                details: "Visita a CFS e atividades no 2BtlOpRib (Corrida com a tripulação, Demonstração Desembarque Ribeirinho com o NA Pará, visita a área de treinamento do Dr Guataçara - ASC)",
+                hidePdf: true,
+                hideWord: true
             }
         ];
 
@@ -264,7 +298,7 @@
                     <span class="inline-flex text-[9px] font-bold px-2 py-0.5 rounded bg-navy-50 text-navy-800 border border-navy-100">${om}</span>
                 `).join('');
 
-                // Determinar singular ou plural para Autoridades de forma dinâmica (REQUISITO 4)
+                // Determinar singular ou plural para Autoridades de forma dinâmica
                 const authLabel = event.authorities.length === 1 ? "Autoridade" : "Autoridades";
 
                 // Autoridades estruturadas individualmente em bullets
@@ -275,16 +309,12 @@
                     </li>
                 `).join('');
 
-                // Customizar o título de download do PDF para Memorando em casos específicos (REQUISITO 6)
-                const isMemorando = event.id === "e1" || event.id === "e4";
-                const pdfTitle = isMemorando ? "Memorando" : "Descarregar PDF";
-
-                // Verificar se o evento é uma VISITEC (REQUISITO 6)
-                const isVisitec = event.title.toLowerCase().includes("visitec");
+                // Customizar o título de download do PDF para Memorando em casos específicos
+                const pdfTitle = event.isMemorando ? "Memorando" : "Descarregar PDF";
 
                 // Montar o botão do PDF de forma condicional
                 let pdfButtonHtml = "";
-                if (!isVisitec) {
+                if (!event.hidePdf) {
                     pdfButtonHtml = `
                         <!-- Descarregar PDF/Memorando (Vermelho) -->
                         <button onclick="downloadMockFile('${event.id}', 'pdf')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-red-600 hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="${pdfTitle}">
@@ -293,8 +323,19 @@
                     `;
                 }
 
+                // Montar o botão do Word de forma condicional
+                let wordButtonHtml = "";
+                if (!event.hideWord) {
+                    wordButtonHtml = `
+                        <!-- Descarregar Ficheiro de Texto (Preto) -->
+                        <button onclick="downloadMockFile('${event.id}', 'word')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-black hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="Descarregar Ofício">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </button>
+                    `;
+                }
+
                 const eventCard = document.createElement('div');
-                // Estilo igual à caixa de título do cabeçalho com faixa amarela à esquerda (REQUISITOS 1 e 2)
+                // Estilo igual à caixa de título do cabeçalho com faixa amarela à esquerda
                 eventCard.className = `group relative rounded-2xl bg-white border ${isExpanded ? 'border-navy-900 shadow-premium-hover ring-1 ring-navy-900/10' : 'border-slate-150 hover:border-slate-200'} overflow-hidden transition-all duration-300 shadow-premium pl-6 pr-5 py-5`;
                 
                 eventCard.innerHTML = `
@@ -307,7 +348,7 @@
                     <!-- CABEÇALHO DO CARD (Sempre Visível) -->
                     <div class="flex items-center justify-between gap-4 cursor-pointer select-none" onclick="toggleCard('${event.id}')">
                         <div class="min-w-0 flex-grow">
-                            <!-- Data estilizada proporcional ao título, sem negrito (REQUISITO 3) -->
+                            <!-- Data estilizada proporcional ao título, sem negrito -->
                             <div class="flex items-center gap-1.5 mb-1.5">
                                 <span class="font-display font-medium text-xs text-navy-900 tracking-wide uppercase">
                                     ${event.dateFormatted}
@@ -321,11 +362,8 @@
                         <!-- Botões Rápidos de Ação e Download (Ícones vermelhos e pretos) -->
                         <div class="flex items-center gap-2 shrink-0" onclick="event.stopPropagation()">
                             ${pdfButtonHtml}
+                            ${wordButtonHtml}
                             
-                            <!-- Descarregar Ficheiro de Texto (Preto) -->
-                            <button onclick="downloadMockFile('${event.id}', 'word')" class="w-9 h-9 rounded-xl bg-navy-50 hover:bg-navy-900 text-black hover:text-white flex items-center justify-center text-xs transition-all duration-200 active:scale-95 border border-navy-100 focus:outline-none" title="Descarregar Ofício">
-                                <i class="fa-solid fa-file-lines"></i>
-                            </button>
                             <!-- Chevron de Expansão -->
                             <button onclick="toggleCard('${event.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-navy-900 flex items-center justify-center text-xs transition-transform duration-300 ${isExpanded ? 'rotate-180 text-navy-900' : ''}">
                                 <i class="fa-solid fa-chevron-down"></i>
@@ -337,7 +375,7 @@
                     <div class="transition-max-height overflow-hidden ${isExpanded ? 'max-h-[600px] border-t border-slate-100 mt-4' : 'max-h-0'}" style="will-change: max-height;">
                         <div class="pt-4 flex flex-col gap-4 text-xs">
                             
-                            <!-- AUTORIDADES (Bullets com pluralização automática - REQUISITO 4) -->
+                            <!-- AUTORIDADES -->
                             <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-navy-900">
                                 <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-2">${authLabel}</span>
                                 <ul class="space-y-1.5">
@@ -359,7 +397,7 @@
                                 </div>
                             </div>
 
-                            <!-- BOTÃO PROGRAMA DE EVENTOS (Aviso em construção - REQUISITO 5) -->
+                            <!-- BOTÃO PROGRAMA DE EVENTOS (Aviso em construção) -->
                             <button onclick="openProgramModal('${event.id}')" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm focus:outline-none">
                                 <i class="fa-solid fa-calendar-days text-militar-yellow"></i> Programa de Eventos
                             </button>
@@ -380,7 +418,7 @@
             renderEvents();
         }
 
-        // Gestão do Modal "Programa de Eventos" - Retorna aviso de em construção (REQUISITO 5)
+        // Gestão do Modal "Programa de Eventos" - Retorna aviso de em construção
         function openProgramModal(eventId) {
             const event = originalSchedule.find(e => e.id === eventId);
             if (!event) return;
@@ -457,7 +495,9 @@
             if (!event) return;
 
             const isMemorando = event.id === "e1" || event.id === "e4";
-            const docName = isMemorando ? "Memorando" : "Diretriz";
+            
+            // UTILIZAÇÃO DO OBJETO DE CONFIGURAÇÃO DE NOMES DE ARQUIVO
+            const customFileName = CONFIG_NOMES_ARQUIVOS.gerarNomeCompleto(event, format, isMemorando);
 
             const separator = `========================================================\n`;
             const header = `              MARINHA DO BRASIL - COM4DN\n` +
@@ -477,18 +517,15 @@
             const rawText = separator + header + separator + "\n" + content;
             
             const element = document.createElement('a');
-            const fileExtension = format === 'pdf' ? 'pdf' : 'doc';
-            const fileName = `${docName.toUpperCase()}_${event.id}_${format}.${fileExtension}`;
-            
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(rawText));
-            element.setAttribute('download', fileName);
+            element.setAttribute('download', customFileName);
             element.style.display = 'none';
             document.body.appendChild(element);
             
             element.click();
             document.body.removeChild(element);
             
-            showToast(`${docName} (.${format.toUpperCase()}) descarregado!`);
+            showToast(`Documento baixado como: ${customFileName}`);
         }
 
         // Feedback visual discreto (Micro-Toast)
