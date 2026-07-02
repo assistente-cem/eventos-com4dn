@@ -74,7 +74,7 @@
             <!-- ESPAÇO PARA IMAGEM PNG PROPORCIONAL AO TÍTULO -->
             <div class="shrink-0">
                 <!-- Substitua o "src" pelo seu ficheiro local "brasao-4dn.png" -->
-                <img id="brasaoImg" src="brasao.png" 
+                <img id="brasaoImg" src="brasao-4dn.png" 
                      onerror="showFallbackIcon()" 
                      alt="Brasão Com4ºDN" 
                      class="w-14 h-14 object-contain transition-all duration-200" />
@@ -159,6 +159,33 @@
 
     <!-- SCRIPT DE LOGICA E DADOS -->
     <script>
+        // ==========================================
+        // CONFIGURAÇÃO DE NOMES DOS ARQUIVOS BAIXADOS
+        // ==========================================
+        const CONFIG_NOMES_ARQUIVOS = {
+            pdfDiretrizPadrao: "Diretriz_Oficial",
+            pdfMemorandoPadrao: "Memorando_Com4DN",
+            wordOficioPadrao: "Oficio_Diretriz",
+            arquivosCustomizados: {
+                "e1": {
+                    "pdf": "Memo-Anna-Nery.pdf"
+                }
+            },
+            gerarNomeCompleto: function(evento, formato, isMemorando) {
+                const idEvento = evento.id;
+                if (this.arquivosCustomizados[idEvento] && this.arquivosCustomizados[idEvento][formato]) {
+                    return this.arquivosCustomizados[idEvento][formato];
+                }
+                const dataSanitizada = evento.dateFormatted.replace(/\s+/g, '_'); 
+                if (formato === 'pdf') {
+                    const prefixo = isMemorando ? this.pdfMemorandoPadrao : this.pdfDiretrizPadrao;
+                    return `${prefixo}_${idEvento}_${dataSanitizada}.pdf`;
+                } else {
+                    return `${this.wordOficioPadrao}_${idEvento}_${dataSanitizada}.doc`;
+                }
+            }
+        };
+
         // Dados estruturados oficiais das comitivas militares (Patentes e nomes atualizados de acordo com as especificações)
         const originalSchedule = [
             {
@@ -167,9 +194,48 @@
                 dateEnd: "2026-07-28",
                 dateFormatted: "28 JUL 2026",
                 title: "Incorporação do NAsH \"Anna Nery\"",
-                authorities: ["Alte Esq BETEGA (CEMA)", "Alte Esq EDGAR (DGMM)"],
+                authorities: ["Alte Esq Betega (CEMA)", "Alte Esq Edgar (DGMM)"],
                 omInvolved: ["Com4ºDN", "ComGptPatNavN", "2ºBtlOpRib", "CHN-4"],
-                details: "O DGMM chega no dia 26JUL e no dia 27JUL visitará o 2BtlOpRib (Obras), BNVC (Dique seco, obras no píer, Navios do GNN e do CHN) e Com4DN (Auditório Portal da Amazônia).",
+                details: `
+                    <div class="space-y-3">
+                        <div>
+                            <span class="block font-bold text-slate-900 mb-1">Chegada das Autoridades no Aeroporto de Belém:</span>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium">
+                                <li><strong>Alte Esq Edgar:</strong> Domingo (26/07) às 17h15</li>
+                                <li><strong>Alte Esq Betega:</strong> Terça-feira (28/07) às 11h50</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-2">
+                            <span class="block font-bold text-slate-900 mb-1">Regresso das Autoridades no Aeroporto de Belém:</span>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium">
+                                <li><strong>Alte Esq Betega:</strong> Quarta-feira (29/07) às 4h25</li>
+                                <li><strong>Alte Esq Edgar:</strong> Quarta-feira (29/07) às 5h05</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-t border-slate-100 pt-2">
+                            <span class="block font-bold text-slate-900 mb-1.5">Agenda Resumida:</span>
+                            
+                            <div class="mb-2">
+                                <span class="block font-bold text-navy-900 text-[11px] uppercase tracking-wide">Segunda-feira (27/07)</span>
+                                <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium mt-1">
+                                    <li>07h - Café da manhã, na Residência Funcional</li>
+                                    <li>08h15 - Visita ao Dique seco, obras no píer e navios (BNVC)</li>
+                                    <li>12h20 - Almoço no Com4ºDN</li>
+                                    <li>15h00 - Visita ao 2°BtlOpRib</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <span class="block font-bold text-navy-900 text-[11px] uppercase tracking-wide">Terça-feira (28/07)</span>
+                                <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium mt-1">
+                                    <li>19h15 - Cerimônia de Incorporação do NAsH "Anna Nery"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `,
                 isMemorando: true,
                 hideWord: true,
                 
@@ -183,7 +249,7 @@
                 dateEnd: "2026-08-06",
                 dateFormatted: "04 a 06 AGO 2026",
                 title: "Visitec DSM",
-                authorities: ["V Alte Md MARCOS (DSM)"],
+                authorities: ["V Alte Md Marcos (DSM)"],
                 omInvolved: ["Com4ºDN", "HNBe"],
                 details: "Visita ao UMI e HNBe.",
                 hidePdf: true,
@@ -195,7 +261,7 @@
                 dateEnd: "2026-08-06",
                 dateFormatted: "04 a 06 AGO 2026",
                 title: "Visitec SGM",
-                authorities: ["Alte Esq ANDRÉ (SGM)"],
+                authorities: ["Alte Esq André (SGM)"],
                 omInvolved: ["Com4ºDN", "CeIMBe", "BNVC", "2ºBtlOpRib", "CHN-4"],
                 details: "Visita ao UMI e HNBe.",
                 hidePdf: true,
@@ -210,9 +276,9 @@
                 dateEnd: "2026-09-01",
                 dateFormatted: "24 AGO a 01 SET 2026",
                 title: "IAM Com4DN",
-                authorities: ["Alte Esq VAZQUEZ (CON)"],
+                authorities: ["Alte Esq Vazquez (CON)"],
                 omInvolved: ["Com4ºDN", "HNBe", "ComGptPatNavN", "CeIMBe", "CIABA", "CFS", "CPAP", "CPMA", "CPPI", "CPAOR", "2ºBtlOpRib", "CHN-4", "EsqdHU-41"],
-                details: "Visita às Organizações Militares da área de Belém e à CFS. A programação inclui demonstração operativa ribeirinha a bordo do NA Pará e visitação aos navios Anna Nery e Sgt Lima.",
+                details: "Visita a TODAS as OM da área Belém, além da CFS e CPAP (ASC). O detalhamento da visita será encaminhado em breve por Memorando. Os deslocamentos a CFS e CPAP (caso ocorra) serão com ANV UH-15. Faremos uma demonstração operativa ribeirinha a bordo do NA Pará e visita ao Anna Nery e Sgt Lima. Avalio realizar o evento de celebração dos 150 anos do Edifício do Com4DN no dia 26 ou 27AGO;",
                 isMemorando: true,
                 hideWord: true,
                 
@@ -226,9 +292,9 @@
                 dateEnd: "2026-10-13",
                 dateFormatted: "05 a 13 OUT 2026",
                 title: "Visita do Almirantado Programada (VAP)",
-                authorities: ["Alte Esq (FN) CARLOS CHAGAS (CGCFN)"],
+                authorities: ["Alte Esq (FN) Carlos Chagas (CGCFN)"],
                 omInvolved: ["Com4ºDN", "ComGptPatNavN", "2ºBtlOpRib", "CFS", "NAPara"],
-                details: "Visita à CFS e atividades no 2BtlOpRib (Corrida com a tripulação, Demonstração Desembarque Ribeirinho com o NA Pará) além de visita à área de treinamento do Dr Guataçara - ASC)",
+                details: "Visita a CFS e atividades no 2BtlOpRib (Corrida com a tripulação, Demonstração Desembarque Ribeirinho com o NA Pará, visita a área de treinamento do Dr Guataçara - ASC)",
                 hidePdf: true,
                 hideWord: true
             }
@@ -319,6 +385,24 @@
                     `;
                 }
 
+                // Montar o botão/link do programa de eventos de forma dinâmica e condicional
+                let programButtonHtml = "";
+                if (event.id === "e1") {
+                    programButtonHtml = `
+                        <!-- Redirecionamento Direto para o Link Real da Incorporação -->
+                        <a href="https://assistente-cem.github.io/incorporacao-nash-anna-nery" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm focus:outline-none text-center block">
+                            <i class="fa-solid fa-calendar-days text-militar-yellow"></i> Programa de Eventos
+                        </a>
+                    `;
+                } else {
+                    programButtonHtml = `
+                        <!-- Botão Padrão para Modal em Construção -->
+                        <button onclick="openProgramModal('${event.id}')" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm focus:outline-none">
+                            <i class="fa-solid fa-calendar-days text-militar-yellow"></i> Programa de Eventos
+                        </button>
+                    `;
+                }
+
                 const eventCard = document.createElement('div');
                 // Estilo igual à caixa de título do cabeçalho com faixa amarela à esquerda
                 eventCard.className = `group relative rounded-2xl bg-white border ${isExpanded ? 'border-navy-900 shadow-premium-hover ring-1 ring-navy-900/10' : 'border-slate-150 hover:border-slate-200'} overflow-hidden transition-all duration-300 shadow-premium pl-6 pr-5 py-5`;
@@ -357,7 +441,7 @@
                     </div>
 
                     <!-- SECÇÃO DETALHADA DE EXPANSÃO -->
-                    <div class="transition-max-height overflow-hidden ${isExpanded ? 'max-h-[600px] border-t border-slate-100 mt-4' : 'max-h-0'}" style="will-change: max-height;">
+                    <div class="transition-max-height overflow-hidden ${isExpanded ? 'max-h-[800px] border-t border-slate-100 mt-4' : 'max-h-0'}" style="will-change: max-height;">
                         <div class="pt-4 flex flex-col gap-4 text-xs">
                             
                             <!-- AUTORIDADES -->
@@ -371,21 +455,19 @@
                             <!-- PROGRAMAÇÃO -->
                             <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-militar-yellow">
                                 <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-2">Programação e Detalhes</span>
-                                <p class="text-slate-700 leading-relaxed text-xs font-medium">${event.details}</p>
+                                <div class="text-slate-700 leading-relaxed text-xs font-medium">${event.details}</div>
                             </div>
 
                             <!-- ORGANIZAÇÕES MILITARES ENVOLVIDAS -->
                             <div>
-                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1.5">Organizações Miltitares envolvidas:</span>
+                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1.5">Organizações Subordinadas</span>
                                 <div class="flex flex-wrap gap-1.5">
                                     ${omTags}
                                 </div>
                             </div>
 
-                            <!-- BOTÃO PROGRAMA DE EVENTOS (Aviso em construção) -->
-                            <button onclick="openProgramModal('${event.id}')" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm focus:outline-none">
-                                <i class="fa-solid fa-calendar-days text-militar-yellow"></i> Programa de Eventos
-                            </button>
+                            <!-- BOTÃO PROGRAMA DE EVENTOS -->
+                            ${programButtonHtml}
                         </div>
                     </div>
                 `;
