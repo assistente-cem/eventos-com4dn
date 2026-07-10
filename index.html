@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-PT" class="h-full bg-slate-50">
 <head>
+
+    <!-- Configurações de Favicon e Atalho para Tela Inicial -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Comando do 4º Distrito Naval — Visitas Programadas</title>
@@ -55,39 +61,12 @@
         .transition-max-height {
             transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        /* Barra de rolagem discreta e elegante para otimização de espaço em telas menores */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 5px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
     </style>
 </head>
 <body class="flex flex-col min-h-full bg-[#F8FAFC] text-slate-800 antialiased pb-12">
-
-    <!-- CABEÇALHO REESTRUTURADO: BRASÃO POSICIONADO À ESQUERDA -->
+    <!-- CABEÇALHO COM ESPAÇO PARA IMAGEM PNG PROPORCIONAL -->
     <header class="sticky top-0 z-40 bg-white border-b border-slate-100 px-6 py-4 shadow-sm">
-        <div class="max-w-md mx-auto flex items-center justify-start gap-4">
-            <!-- ESPAÇO PARA IMAGEM PNG PROPORCIONAL AO TÍTULO -->
-            <div class="shrink-0">
-                <!-- Substitua o "src" pelo seu ficheiro local "brasao-4dn.png" -->
-                <img id="brasaoImg" src="brasao-4dn.png" 
-                     onerror="showFallbackIcon()" 
-                     alt="Brasão Com4ºDN" 
-                     class="w-14 h-14 object-contain transition-all duration-200" />
-            </div>
-
-            <!-- TÍTULO DA ORGANIZAÇÃO (À DIREITA DO BRASÃO) -->
+        <div class="max-w-md mx-auto flex items-center justify-between gap-4">
             <div class="min-w-0 flex-grow">
                 <h1 class="font-display font-extrabold text-base tracking-tight text-navy-900 leading-tight">
                     Comando do 4º Distrito Naval
@@ -95,6 +74,15 @@
                 <p class="text-[10px] uppercase tracking-widest text-slate-500 font-extrabold mt-1">
                     Guardião do Portal da Amazónia
                 </p>
+            </div>
+            
+            <!-- ESPAÇO PARA IMAGEM PNG PROPORCIONAL AO TÍTULO -->
+            <div class="shrink-0">
+                <!-- Substitua o "src" pelo seu ficheiro local "brasao-4dn.png" -->
+                <img id="brasaoImg" src="brasao-4dn.png" 
+                     onerror="showFallbackIcon()" 
+                     alt="Brasão Com4ºDN" 
+                     class="w-14 h-14 object-contain transition-all duration-200" />
             </div>
         </div>
     </header>
@@ -134,7 +122,6 @@
         <section class="relative flex flex-col gap-4 pl-2 border-l border-slate-200" id="eventsContainer">
             <!-- Eventos gerados dinamicamente via JavaScript -->
         </section>
-
     </main>
 
     <!-- RODAPÉ EXCLUSIVO SOLICITADO -->
@@ -187,8 +174,8 @@
                 "e1": {
                     "pdf": "Memo-Anna-Nery.pdf"
                 },
-                "e4": {
-                    "pdf": "Memorando_IAM_Com4DN.pdf"
+                "e6": {
+                    "pdf": "Memorando-150-Anos-Predio-Com4DN.pdf"
                 }
             },
             gerarNomeCompleto: function(evento, formato, isMemorando) {
@@ -215,20 +202,19 @@
                 dateFormatted: "28 JUL 2026",
                 title: "Incorporação do NAsH \"Anna Nery\"",
                 authorities: ["Alte Esq Betega (CEMA)", "Alte Esq Edgar (DGMM)"],
-                omInvolved: ["Com4ºDN", "ComGptPatNavN", "2ºBtlOpRib", "CHN-4"],
+                omInvolved: ["Com4ºDN", "ComGptPatNavN", "BNVC", "2ºBtlOpRib", "CHN-4"],
                 details: `
-                    <div class="space-y-3 text-slate-700 font-medium">
+                    <div class="space-y-3">
                         <div>
-                            <span class="block font-bold text-slate-900 mb-1">Chegada das Autoridades no Aeroporto de Belém:</span>
-                            <ul class="list-disc pl-5 space-y-1">
+                            <span class="block font-bold text-slate-900 mb-1">Chegada das Autoridades:</span>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium">
                                 <li><strong>Alte Esq Edgar:</strong> Domingo (26/07) às 17h15</li>
                                 <li><strong>Alte Esq Betega:</strong> Terça-feira (28/07) às 11h50</li>
                             </ul>
                         </div>
-
                         <div class="border-t border-slate-100 pt-2">
-                            <span class="block font-bold text-slate-900 mb-1">Regresso das Autoridades no Aeroporto de Belém:</span>
-                            <ul class="list-disc pl-5 space-y-1">
+                            <span class="block font-bold text-slate-900 mb-1">Regresso das Autoridades:</span>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium">
                                 <li><strong>Alte Esq Betega:</strong> Quarta-feira (29/07) às 4h25</li>
                                 <li><strong>Alte Esq Edgar:</strong> Quarta-feira (29/07) às 5h05</li>
                             </ul>
@@ -239,8 +225,8 @@
                             
                             <div class="mb-2">
                                 <span class="block font-bold text-navy-900 text-[11px] uppercase tracking-wide">Segunda-feira (27/07)</span>
-                                <ul class="list-disc pl-5 space-y-1 mt-1">
-                                    <li>07h - Café da manhã, na Residência Funcional</li>
+                                <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium mt-1">
+                                    <li>07h - Café da manhã</li>
                                     <li>08h15 - Visita ao Dique seco, obras no píer e navios (BNVC)</li>
                                     <li>12h20 - Almoço no Com4ºDN</li>
                                     <li>15h00 - Visita ao 2°BtlOpRib</li>
@@ -249,7 +235,7 @@
                             
                             <div>
                                 <span class="block font-bold text-navy-900 text-[11px] uppercase tracking-wide">Terça-feira (28/07)</span>
-                                <ul class="list-disc pl-5 space-y-1 mt-1">
+                                <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium mt-1">
                                     <li>19h15 - Cerimônia de Incorporação do NAsH "Anna Nery"</li>
                                 </ul>
                             </div>
@@ -282,21 +268,8 @@
                 dateFormatted: "04 a 06 AGO 2026",
                 title: "Visitec SGM",
                 authorities: ["Alte Esq André (SGM)"],
-                omInvolved: ["Com4ºDN", "CeIMBe", "BNVC", "2ºBtlOpRib", "CHN-4", "CIABA"],
-                details: `
-                    <div class="space-y-3 text-slate-700 font-medium">
-                        <div>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li><strong>CeIMBe:</strong> Visita ao CeIMBe, refeitório e cozinha do complexo, paióis de munição.</li>
-                                <li>Visita ao Terminal Petroquímico de Miramar.</li>
-                                <li><strong>Com4ºDN/BNVC/2ºBtlOpRib e CIABA:</strong> Visita a todas as Vilas Navais, Clubes e Hotéis de Trânsito (HTs).</li>
-                                <li><strong>2ºBtlOpRib:</strong> Visita às instalações, refeitório e acompanhamento das obras no 2º Batalhão de Operações Ribeirinhas.</li>
-                                <li><strong>CHN-4:</strong> Embarque em um navio do CHN-4, preferencialmente um AvHoFlu, para demonstração de atividades de Hidrografia e Navegação.</li>
-                                <li><strong>Com4ºDN:</strong> Visita ao Rancho.</li>
-                            </ul>
-                        </div>
-                    </div>
-                `,
+                omInvolved: ["Com4ºDN", "CeIMBe", "BNVC", "2ºBtlOpRib", "CHN-4"],
+                details: "Visita ao UMI e HNBe.",
                 hidePdf: true,
                 
                 // Configuração direta do arquivo Word/Ofício
@@ -311,24 +284,7 @@
                 title: "IAM Com4DN",
                 authorities: ["Alte Esq Vazquez (CON)"],
                 omInvolved: ["Com4ºDN", "HNBe", "ComGptPatNavN", "CeIMBe", "CIABA", "CFS", "CPAP", "CPMA", "CPPI", "CPAOR", "2ºBtlOpRib", "CHN-4", "EsqdHU-41"],
-                details: `
-                    <div class="space-y-3 text-slate-700 font-medium">
-                        <div>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li><strong>Com4ºDN:</strong> Recepção ao CON, Mostra de Pessoal e de Material (Prédio do Comando, Seção de Operações, Novo Auditório, Rancho, Rádio Marinha, CLTI e área do novo prédio), Palestra, Inspeção das listas da IAM, entrega de Medalha de Serviço Militar ao VA Batista seguida de almoço, Reuniões de Coordenação e Avaliação e Confraternização de encerramento no Refeitório.</li>
-                                <li><strong>HNBe:</strong> Visita às instalações do Hospital Naval de Belém.</li>
-                                <li><strong>BNVC:</strong> Visita ao NPaFlu "Anna Nery", ao AvHoFlu "Rio Xingu" e ao NA "Pará" (incluindo almoço navegando e acompanhamento de desembarque ribeirinho em Outeiro). Também ocorre a visita às áreas de cessão de uso onerosa e ao complexo alimentar (cozinha/refeitório), além de almoço no refeitório da OM no dia 27 de agosto.</li>
-                                <li><strong>2ºBtlOpRib:</strong> Corrida com a tripulação (TFM), café da manhã na Praça d'Armas e visita às obras do batalhão.</li>
-                                <li><strong>CIABA:</strong> Visita às instalações do Centro de Instrução Almirante Braz de Aguiar.</li>
-                                <li><strong>EsqdHU-41:</strong> Visita às instalações do Esquadrão de Helicópteros de Emprego Geral do Noroeste.</li>
-                                <li><strong>CHN-4:</strong> Visita às instalações do Centro de Hidrografia e Navegação do Noroeste.</li>
-                                <li><strong>CPAOR:</strong> Visita às instalações da Capitania Fluvial dos Portos da Amazônia Oriental.</li>
-                                <li><strong>CFS:</strong> Deslocamento em voo com aeronave militar UH-15 (com parada em Altamira-PA), visita às instalações da Capitania Fluvial de Santarém, navegação no Rio Tapajós e decolagem para Itaituba-PA.</li>
-                                <li><strong>Terminal Cargill - Miritituba:</strong> Visita ao terminal logístico localizado em Itaituba-PA.</li>
-                            </ul>
-                        </div>
-                    </div>
-                `,
+                details: "Visita a TODAS as OM da área Belém, além da CFS e CPAP (ASC). O detalhamento da visita será encaminhado em breve por Memorando. Os deslocamentos a CFS e CPAP (caso ocorra) serão com ANV UH-15. Faremos uma demonstração operativa ribeirinha a bordo do NA Pará e visita ao Anna Nery e Sgt Lima. Avalio realizar o evento de celebração dos 150 anos do Edifício do Com4DN no dia 26 ou 27AGO;",
                 isMemorando: true,
                 hideWord: true,
                 
@@ -347,6 +303,41 @@
                 details: "Visita a CFS e atividades no 2BtlOpRib (Corrida com a tripulação, Demonstração Desembarque Ribeirinho com o NA Pará, visita a área de treinamento do Dr Guataçara - ASC)",
                 hidePdf: true,
                 hideWord: true
+            },
+            {
+                id: "e6",
+                dateStart: "2026-10-07",
+                dateEnd: "2026-10-07",
+                dateFormatted: "07 OUT 2026",
+                title: "Cerimônia alusiva ao 150° Aniversário do Prédio do Com4ºDN",
+                authorities: ["ASC"],
+                omInvolved: ["Com4ºDN", "HNBe", "2°BtlOpRib"],
+                details: `
+                    <div class="space-y-3">
+                        <div>
+                            <span class="block font-bold text-slate-900 mb-1">Horário:</span>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium">
+                                <li>19h00</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-slate-100 pt-2">
+                            <span class="block font-bold text-slate-900 mb-1">Local:</span>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 font-medium">
+                                <li>Praça Carneiro da Rocha, S/N - Cidade Velha - Belém-PA - CEP: 66020-150</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-slate-100 pt-2">
+                            <span class="block font-bold text-slate-900 mb-1">Descrição:</span>
+                            <p class="text-slate-700 font-medium leading-relaxed">
+                                Cerimônia alusiva ao 150° Aniversário do Prédio do Comando do 4° Distrito Naval, cuja coordenação caberá ao Com4°DN com o lançamento do vídeo institucional com a história do Prédio.
+                            </p>
+                        </div>
+                    </div>
+                `,
+                isMemorando: true,
+                hideWord: true,
+                pdfUrl: "Memorando-150-Anos-Predio-Com4DN.pdf",
+                pdfFileName: "Memorando-150-Anos-Predio-Com4DN.pdf"
             }
         ];
 
@@ -376,7 +367,7 @@
             });
         }
 
-        // Renderização dos cards de Itinerário
+        // Renderização dos cards de Itinerário empilhados com borda amarela de alto contraste
         function renderEvents() {
             sortEvents();
             const container = document.getElementById('eventsContainer');
@@ -444,13 +435,6 @@
                             <i class="fa-solid fa-calendar-days text-militar-yellow"></i> Programa de Eventos
                         </a>
                     `;
-                } else if (event.id === "e4") {
-                    programButtonHtml = `
-                        <!-- Redirecionamento Direto para o Arquivo PDF do Programa de Eventos da IAM -->
-                        <a href="Programa_de_Eventos.pdf" target="_blank" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm focus:outline-none text-center block">
-                            <i class="fa-solid fa-file-pdf text-militar-yellow"></i> Programa de Eventos
-                        </a>
-                    `;
                 } else {
                     programButtonHtml = `
                         <!-- Botão Padrão para Modal em Construção -->
@@ -461,15 +445,20 @@
                 }
 
                 const eventCard = document.createElement('div');
+                // Estilo igual à caixa de título do cabeçalho com faixa amarela à esquerda
                 eventCard.className = `group relative rounded-2xl bg-white border ${isExpanded ? 'border-navy-900 shadow-premium-hover ring-1 ring-navy-900/10' : 'border-slate-150 hover:border-slate-200'} overflow-hidden transition-all duration-300 shadow-premium pl-6 pr-5 py-5`;
                 
                 eventCard.innerHTML = `
+                    <!-- Faixa lateral amarela para dar exatamente o mesmo destaque visual e herança da caixa de título -->
                     <div class="absolute top-0 left-0 w-1.5 h-full bg-militar-yellow"></div>
+                    
+                    <!-- Ponto de ancoragem na linha do tempo vertical -->
                     <div class="absolute top-6 -left-[13px] w-2.5 h-2.5 rounded-full bg-white border-2 border-navy-900 z-10"></div>
                     
-                    <!-- CABEÇALHO DO CARD -->
+                    <!-- CABEÇALHO DO CARD (Sempre Visível) -->
                     <div class="flex items-center justify-between gap-4 cursor-pointer select-none" onclick="toggleCard('${event.id}')">
                         <div class="min-w-0 flex-grow">
+                            <!-- Data estilizada proporcional ao título, sem negrito -->
                             <div class="flex items-center gap-1.5 mb-1.5">
                                 <span class="font-display font-medium text-xs text-navy-900 tracking-wide uppercase">
                                     ${event.dateFormatted}
@@ -479,11 +468,12 @@
                                 ${event.title}
                             </h3>
                         </div>
-
+                        <!-- Botões Rápidos de Ação e Download (Ícones vermelhos e pretos) -->
                         <div class="flex items-center gap-2 shrink-0" onclick="event.stopPropagation()">
                             ${pdfButtonHtml}
                             ${wordButtonHtml}
                             
+                            <!-- Chevron de Expansão -->
                             <button onclick="toggleCard('${event.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-navy-900 flex items-center justify-center text-xs transition-transform duration-300 ${isExpanded ? 'rotate-180 text-navy-900' : ''}">
                                 <i class="fa-solid fa-chevron-down"></i>
                             </button>
@@ -491,7 +481,7 @@
                     </div>
 
                     <!-- SECÇÃO DETALHADA DE EXPANSÃO -->
-                    <div class="transition-max-height overflow-hidden ${isExpanded ? 'max-h-[1200px] border-t border-slate-100 mt-4' : 'max-h-0'}" style="will-change: max-height;">
+                    <div class="transition-max-height overflow-hidden ${isExpanded ? 'max-h-[800px] border-t border-slate-100 mt-4' : 'max-h-0'}" style="will-change: max-height;">
                         <div class="pt-4 flex flex-col gap-4 text-xs">
                             
                             <!-- AUTORIDADES -->
@@ -502,15 +492,15 @@
                                 </ul>
                             </div>
 
-                            <!-- PROGRAMAÇÃO COM BARRA DE ROLAGEM LIMITADA PARA ESPAÇOS PEQUENOS -->
+                            <!-- PROGRAMAÇÃO -->
                             <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-militar-yellow">
                                 <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-2">Programação e Detalhes</span>
-                                <div class="text-slate-700 leading-relaxed text-xs max-h-64 overflow-y-auto pr-2 custom-scrollbar">${event.details}</div>
+                                <div class="text-slate-700 leading-relaxed text-xs font-medium">${event.details}</div>
                             </div>
 
                             <!-- ORGANIZAÇÕES MILITARES ENVOLVIDAS -->
                             <div>
-                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1.5">Organizações Militares envolvidas:</span>
+                                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-extrabold block mb-1.5">Organizações Militares envolvidas</span>
                                 <div class="flex flex-wrap gap-1.5">
                                     ${omTags}
                                 </div>
@@ -521,22 +511,27 @@
                         </div>
                     </div>
                 `;
-
                 container.appendChild(eventCard);
             });
         }
 
         function toggleCard(id) {
-            openCardId = (openCardId === id) ? null : id;
+            if (openCardId === id) {
+                openCardId = null;
+            } else {
+                openCardId = id;
+            }
             renderEvents();
         }
 
-        // Modal para os itens em construção
+        // Gestão do Modal "Programa de Eventos" - Retorna aviso de em construção
         function openProgramModal(eventId) {
             const event = originalSchedule.find(e => e.id === eventId);
             if (!event) return;
             
-            document.getElementById('modalBody').innerHTML = `
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
                 <div class="flex flex-col items-center justify-center py-8 text-center gap-4">
                     <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center text-militar-yellow">
                         <i class="fa-solid fa-person-digging text-3xl"></i>
@@ -547,12 +542,14 @@
                     </div>
                 </div>
             `;
+            
             toggleProgramModal();
         }
 
         function toggleProgramModal() {
             const modal = document.getElementById('programModal');
             const content = document.getElementById('programContent');
+            
             if (modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
                 setTimeout(() => {
@@ -562,12 +559,15 @@
             } else {
                 modal.classList.add('opacity-0');
                 content.classList.add('scale-95');
-                setTimeout(() => modal.classList.add('hidden'), 300);
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
             }
         }
 
         function toggleSorting() {
             ascendingOrder = !ascendingOrder;
+            
             const label = document.getElementById('sortLabel');
             const icon = document.getElementById('sortIcon');
             
@@ -578,33 +578,46 @@
                 label.innerText = "Mais Distantes Primeiro";
                 icon.className = "fa-solid fa-arrow-up-wide-short text-militar-yellow";
             }
+            
             renderEvents();
             showToast("Cronograma reordenado com sucesso!");
         }
 
         function filterEvents() {
             const query = document.getElementById('searchInput').value.toLowerCase();
+            
             schedule = originalSchedule.filter(event => {
                 return event.title.toLowerCase().includes(query) ||
                        event.authorities.some(auth => auth.toLowerCase().includes(query)) ||
                        event.omInvolved.some(om => om.toLowerCase().includes(query));
             });
+            
             renderEvents();
         }
 
+        // Feedback visual discreto (Micro-Toast)
         function showToast(message) {
             const container = document.getElementById('toastContainer');
+            
             const toast = document.createElement('div');
             toast.className = "flex items-center gap-2.5 px-4.5 py-3 bg-navy-900 border border-slate-700 rounded-xl shadow-xl text-xs text-white opacity-0 translate-y-2 transition-all duration-300 pointer-events-auto border-l-4 border-l-militar-yellow";
+            
             toast.innerHTML = `
                 <i class="fa-solid fa-circle-check text-militar-yellow text-sm shrink-0"></i>
                 <span class="font-bold tracking-tight">${message}</span>
             `;
+            
             container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-2'), 50);
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2');
+            }, 50);
+            
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
             }, 2500);
         }
     </script>
